@@ -1,0 +1,40 @@
+name: build
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 9.2.1
+
+      - name: Build jars
+        run: |
+          FOUND=0
+          for SETTINGS in $(find . -name settings.gradle | sort); do
+            FOUND=1
+            echo "Building $(dirname "$SETTINGS")"
+            (cd "$(dirname "$SETTINGS")" && gradle build)
+          done
+          if [ "$FOUND" = "0" ]; then
+            echo "settings.gradle not found. Files in the repo:"
+            find . -not -path './.git/*' -type f
+            exit 1
+          fi
+
+      - name: Upload jars
+        uses: actions/upload-artifact@v4
+        with:
+          name: mod-jars
+          path: "**/build/libs/*.jar"
