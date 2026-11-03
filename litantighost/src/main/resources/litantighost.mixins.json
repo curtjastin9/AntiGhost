@@ -1,0 +1,12 @@
+{
+	"required": true,
+	"package": "com.litantighost.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"client": [
+		"MultiPlayerGameModeMixin",
+		"ClientPacketListenerMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

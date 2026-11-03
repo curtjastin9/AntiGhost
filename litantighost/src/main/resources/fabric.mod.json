@@ -1,0 +1,32 @@
+{
+	"schemaVersion": 1,
+	"id": "litantighost",
+	"version": "${version}",
+	"name": "LitAntiGhost",
+	"description": "Anti ghost placement. Client side: placements, glowstone charges and anchor changes the server never confirms are rolled back, and placements the server would refuse are not sent. Server side: after every block placement, glowstone use or totem click the real block state is sent back to the player.",
+	"authors": [
+		"Dr_LitTwo"
+	],
+	"contributors": [
+		"Claude (vibe coding help)"
+	],
+	"license": "MIT",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.litantighost.LitAntiGhost"
+		],
+		"client": [
+			"com.litantighost.LitAntiGhostClient"
+		]
+	},
+	"mixins": [
+		"litantighost.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.0",
+		"fabric-api": "*",
+		"minecraft": "~1.21.11",
+		"java": ">=21"
+	}
+}
